@@ -11,7 +11,7 @@
     ·
     <a href="https://github.com/piyushyadav0191/Instagram-clone/issues">Request Feature</a>
   </p>
-</p>
+</p> 
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -36,6 +36,7 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
+<br>
 
 ## ℹ️ About The Project
 
