@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useFeedPostStyles } from "../../styles";
 import UserCard from "../shared/UserCard";
-import { CommentIcon, MoreIcon, ShareIcon } from "../../icons";
+import { CommentIcon, LikeIcon, MoreIcon, RemoveIcon, SaveIcon, ShareIcon, UnlikeIcon } from "../../icons";
 import { Link } from "react-router-dom";
-import { Button, Divider, Hidden, Typography } from "@material-ui/core";
+import { Button, Divider, Hidden, TextField, Typography } from "@material-ui/core";
 import HTMLEllipsis from "react-lines-ellipsis/lib/html";
 
 function FeedPost({ post }) {
@@ -105,13 +105,59 @@ function FeedPost({ post }) {
 }
 
 function LikeButton() {
-  return <>LikeButton</>;
+  const classes = useFeedPostStyles()
+  const [liked, setLiked] = useState(false);
+  const Icon = liked ? UnlikeIcon : LikeIcon;
+  const className = liked ? classes.liked : classes.like;
+  const handleLike = () => {
+    console.log('like')
+    setLiked(true)
+  }
+  
+  const handleUnLike = () => {
+    console.log('unlike')
+    setLiked(false)
+  }
+  const onClick = liked ? handleUnLike : handleLike
+  
+  
+
+  return <Icon className={className} onClick={onClick} />;
 }
 function SaveButton() {
-  return <>SaveButton</>;
+
+  const classes = useFeedPostStyles()
+  const [saved, setSaved] = useState(false);
+  const Icon = saved ? RemoveIcon : SaveIcon;
+
+  const handleSave = () => {
+    console.log('save')
+    setSaved(true)
+  }
+  
+  const handleUnSave = () => {
+    console.log('unsave')
+    setSaved(false)
+  }
+  const onClick = saved ? handleUnSave : handleSave
+  
+  return <Icon className={classes.saveIcon}  onClick={onClick} />;
 }
 function Comment() {
-  return <>Comment</>;
+  const classes = useFeedPostStyles();
+  const [content, setContent] = useState('');
+
+  return (
+    <div className={classes.commentContainer}>
+      <TextField className={classes.textField} fullWidth value={content} placeholder=" Add a comment..." multiline maxRows={2} minRows={1} onChange={event  => setContent(event.target.value)} InputProps={{classes: {
+        root: classes.root,
+        underline: classes.underline
+      }}} />
+      <Button color="primary" className={classes.commentButton} disabled={!content.trim()} >
+        Post
+      </Button>
+    </div>
+  )
 }
 
 export default FeedPost;
